@@ -1,5 +1,9 @@
-# Getting-Started-with-Express
+
+Intro by Zhiping
+
    There is a earlier version of tutorial for Express 3. Ignore that one.
+
+   A very good tutorial.
 
 ## Section 1
 
@@ -36,17 +40,23 @@
   - app.enabled()
   - app.disabled()
 
-
-- `` app.set('env', 'development');  // default: process.env.NODE_ENV``
-- `` app.enable ('trust proxy') ``
-- `` app.set('jsonp callback name', 'cb')``
--
-	app.set('json replace', function(attr, val){
-		if(attr === 'passwordHash'){
-          return undefined;
-        }
-          return val;
-      });  
+``` js
+app.set('env', 'development');  // default: process.env.NODE_ENV
+```
+``` js
+app.enable ('trust proxy')
+```
+``` js
+ app.set('jsonp callback name', 'cb')
+```
+``` js
+app.set('json replace', function(attr, val){
+	if(attr === 'passwordHash'){
+        return undefined;
+      }
+        return val;
+    });
+```
 
 - `` app.enable('case sensitive routing'); ``
 - `` app.enable('strict routing');   // /hello !== /hello/ ``
@@ -68,22 +78,25 @@
 
 The middileware below get a user form database by name and attacht the user object to the request
 
-    app.param('name', function(req, res, next, name){
-      req.name = name[0].toUpperCase() + name.subString(1);
+``` js
+app.param('name', function(req, res, next, name){
+  req.name = name[0].toUpperCase() + name.subString(1);
 
-      Users.findOne({userName: name}, function(err, user){
-        req.user = user;
-        next();
-        });
-    }
-
+  Users.findOne({userName: name}, function(err, user){
+    req.user = user;
+    next();
+  });
+}
+```
 
 ### Grouping routes with **app.route()**
 
-    app.route(workflows/:id)
-        .get([callback])
-        .put([callback])
-        .delete([callback]);
+``` js
+app.route(workflows/:id)
+    .get([callback])
+    .put([callback])
+    .delete([callback]);
+```
 
 ### Router object (new in Express 4)
 
@@ -134,9 +147,10 @@ Examples: API versions routers.
 - res.downloadFile(file);
 
 ### Formatting Response
-
-    res.format({
-      'text/plain': function(){ },
-      'text/html': function(){ },
-      'application/json': function(){ }
-      });
+```js
+res.format({
+  'text/plain': function(){ },
+  'text/html': function(){ },
+  'application/json': function(){ }
+});
+```
